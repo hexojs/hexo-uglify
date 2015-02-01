@@ -21,6 +21,7 @@
   "author": "Tommy Chen <tommy351@gmail.com> (http://zespia.tw)",
   "license": "MIT",
   "dependencies": {
+    "minimatch": "^2.0.1",
     "object-assign": "^2.0.0",
     "uglify-js": "^2.4.16"
   },
