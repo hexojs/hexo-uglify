@@ -1,4 +1,5 @@
 # hexo-uglify
+[![Build Status](https://travis-ci.org/hexojs/hexo-uglify.svg?branch=master)](https://travis-ci.org/hexojs/hexo-uglify)
 
 Minify JavaScript files with [UglifyJS].
 
