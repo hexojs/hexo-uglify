@@ -1,6 +1,6 @@
 {
   "name": "hexo-uglify",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Minify JavaScript files with UglifyJS.",
   "main": "index",
   "scripts": {
@@ -18,10 +18,13 @@
     "filter",
     "uglify"
   ],
-  "author": "Tommy Chen <tommy351@gmail.com> (http://zespia.tw)",
+  "author": "Tommy Chen <tommy351@gmail.com> (http://zespia.tw)",  
+  "maintainers": [
+    "Abner Chou <hi@abnerchou.me> (http://abnerchou.me)"
+    ],
   "license": "MIT",
   "dependencies": {
-    "minimatch": "^2.0.1",
+    "minimatch": "^3.0.1",
     "object-assign": "^2.0.0",
     "uglify-js": "^2.4.16"
   },
