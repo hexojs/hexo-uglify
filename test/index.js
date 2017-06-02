@@ -1,5 +1,5 @@
 var assign = require('object-assign');
-var filter = require('./lib/filter');
+var filter = require('../lib/filter');
 
 hexo.config.uglify = assign({
   mangle: true,
