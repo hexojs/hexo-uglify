@@ -1,6 +1,4 @@
-var assign = require('object-assign');
-
-hexo.config.uglify = assign({
+hexo.config.uglify = Object.assign({
   mangle: true,
   output: {},
   compress: {},
