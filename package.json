@@ -28,7 +28,7 @@
     "uglify-js": "^2.6.0"
   },
   "devDependencies": {
-    "chai": "^1.9.1",
+    "chai": "^4.2.0",
     "coveralls": "^3.0.2",
     "gulp": "^3.8.9",
     "gulp-istanbul": "^0.5.0",
