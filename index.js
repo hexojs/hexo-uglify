@@ -1,3 +1,7 @@
+'use strict';
+
+/* global hexo */
+
 hexo.config.uglify = Object.assign({
   mangle: true,
   output: {},
