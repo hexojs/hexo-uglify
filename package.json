@@ -4,7 +4,7 @@
   "description": "Minify JavaScript files with UglifyJS.",
   "main": "index",
   "scripts": {
-    "test": "nyc mocha",
+    "test": "nyc mocha test/index.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "eslint": "eslint ."
   },
