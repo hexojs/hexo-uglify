@@ -4,8 +4,8 @@
   "description": "Minify JavaScript files with UglifyJS.",
   "main": "index",
   "scripts": {
-    "test": "nyc mocha test/index.js",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "test": "mocha test/index.js",
+    "test-cov": "nyc npm run test",
     "eslint": "eslint ."
   },
   "directories": {
@@ -31,7 +31,6 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "coveralls": "^3.0.3",
     "eslint": "^6.1.0",
     "eslint-config-hexo": "3.0.0",
     "mocha": "^6.1.4",
