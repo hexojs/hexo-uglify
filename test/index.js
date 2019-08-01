@@ -2,9 +2,9 @@
 
 const should = require('chai').should(); // eslint-disable-line
 
-describe('hexo-uglifyjs', function() {
+describe('hexo-uglifyjs', () => {
   // Tests.
-  it('should uglify js.', function() {
+  it('should uglify js.', () => {
     return true;
   });
 });
