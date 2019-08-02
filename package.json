@@ -2,7 +2,7 @@
   "name": "hexo-uglify",
   "version": "0.0.5",
   "description": "Minify JavaScript files with UglifyJS.",
-  "main": "index",
+  "main": "index.js",
   "scripts": {
     "test": "mocha test/index.js",
     "test-cov": "nyc npm run test",
@@ -11,6 +11,10 @@
   "directories": {
     "lib": "./lib"
   },
+  "files": [
+    "lib/",
+    "index.js"
+  ],
   "engines": {
     "node": ">= 8.6.0"
   },
