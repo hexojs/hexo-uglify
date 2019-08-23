@@ -27,4 +27,7 @@ uglify:
 - **compress**: Compress options
 - **exclude**: Exclude files
 
+Refer to the [docs] for more options and details.
+
 [UglifyJS]: http://lisperator.net/uglifyjs/
+[docs]: https://github.com/mishoo/UglifyJS2/#minify-options
