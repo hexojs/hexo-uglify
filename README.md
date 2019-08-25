@@ -1,7 +1,7 @@
 # hexo-uglify
 
 [![Build Status](https://travis-ci.org/hexojs/hexo-uglify.svg?branch=master)](https://travis-ci.org/hexojs/hexo-uglify)
-[![NPM version](https://badge.fury.io/js/hexo-uglify.svg)](https://badge.fury.io/js/hexo-uglify)
+[![NPM version](https://badge.fury.io/js/hexo-uglify.svg)](https://www.npmjs.com/package/hexo-uglify)
 
 Minify JavaScript files with [UglifyJS].
 
