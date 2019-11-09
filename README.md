@@ -29,7 +29,6 @@ uglify:
 - **exclude**: Exclude files. Use [glob expressions](https://github.com/micromatch/micromatch#extended-globbing) for path matching.
 - **es6**: Enable es6 compression. Default is `false`
   - When enabled, hexo-uglify will use [terser](https://github.com/terser/terser) as compressor, otherwise [uglifyjs](https://github.com/mishoo/UglifyJS2) will be used.
-  - The API & minify options of terser is fully compatible with uglifyjs.
 
 Refer to the [docs] for more options and details.
 
