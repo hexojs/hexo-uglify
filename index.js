@@ -6,7 +6,12 @@ hexo.config.uglify = Object.assign({
   mangle: true,
   output: {},
   compress: {},
-  exclude: '*.min.js'
+  exclude: '*.min.js',
+  es6: false
 }, hexo.config.uglify);
 
-hexo.extend.filter.register('after_render:js', require('./lib/filter'));
+if (hexo.config.uglify.es6) {
+  hexo.extend.filter.register('after_render:js', require('./lib/filter-terser'));
+} else {
+  hexo.extend.filter.register('after_render:js', require('./lib/filter-uglifyjs'));
+}
