@@ -1,0 +1,4 @@
+colors: true
+reporter: spec
+ui: bdd
+full-trace: true
