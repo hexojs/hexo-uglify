@@ -35,7 +35,7 @@ describe('hexo-uglify', () => {
     result.length.should.below(code.length);
   });
 
-  it('es5 - terser (default options)', () => {
+  it('es5 - terser (default options)', async () => {
     const ctx = {
       config: {
         uglify: {
@@ -59,12 +59,12 @@ describe('hexo-uglify', () => {
     x["baz_"] = 3;
     console.log(x.calc());`;
 
-    const result = terserFilter.apply(ctx, [code, { path: 'source/test.js' }]);
+    const result = await terserFilter.apply(ctx, [code, { path: 'source/test.js' }]);
 
     result.length.should.below(code.length);
   });
 
-  it('es6 - terser (default options)', () => {
+  it('es6 - terser (default options)', async () => {
     const ctx = {
       config: {
         uglify: {
@@ -88,7 +88,7 @@ describe('hexo-uglify', () => {
     x["baz_"] = 3;
     console.log(x.calc());`;
 
-    const result = terserFilter.apply(ctx, [code, { path: 'source/test.js' }]);
+    const result = await terserFilter.apply(ctx, [code, { path: 'source/test.js' }]);
 
     result.length.should.below(code.length);
   });
@@ -122,7 +122,7 @@ describe('hexo-uglify', () => {
     result.should.eql(code);
   });
 
-  it('exclude - terser should ignore *.min.js by default', () => {
+  it('exclude - terser should ignore *.min.js by default', async () => {
     const ctx = {
       config: {
         uglify: {
@@ -146,7 +146,7 @@ describe('hexo-uglify', () => {
     x["baz_"] = 3;
     console.log(x.calc());`;
 
-    const result = terserFilter.apply(ctx, [code, { path: 'source/test.min.js' }]);
+    const result = await terserFilter.apply(ctx, [code, { path: 'source/test.min.js' }]);
 
     result.should.eql(code);
   });
