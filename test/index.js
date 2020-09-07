@@ -3,49 +3,40 @@
 require('chai').should();
 
 describe('hexo-uglify', () => {
-  const terserFilter = require('../lib/filter');
+  const Hexo = require('hexo');
+  const hexo = new Hexo(__dirname, { silent: true });
+  const f = require('../lib/filter').bind(hexo);
+  const defaultCfg = JSON.parse(JSON.stringify(Object.assign(hexo.config, {
+    uglify: {
+      mangle: true,
+      output: {},
+      compress: {},
+      exclude: '*.min.js'
+    }
+  })));
+  const es5 = `
+  var x = {
+      baz_: 0,
+      foo_: 1,
+      calc: function() {
+          return this.foo_ + this.baz_;
+      }
+  };
+  x.bar_ = 2;
+  x["baz_"] = 3;
+  console.log(x.calc());`;
+
+  beforeEach(() => {
+    hexo.config = JSON.parse(JSON.stringify(defaultCfg));
+  });
 
   it('es5 - terser (default options)', async () => {
-    const ctx = {
-      config: {
-        uglify: {
-          mangle: true,
-          output: {},
-          compress: {},
-          exclude: '*.min.js'
-        }
-      }
-    };
+    const result = await f(es5, { path: 'source/test.js' });
 
-    const code = `
-    var x = {
-        baz_: 0,
-        foo_: 1,
-        calc: function() {
-            return this.foo_ + this.baz_;
-        }
-    };
-    x.bar_ = 2;
-    x["baz_"] = 3;
-    console.log(x.calc());`;
-
-    const result = await terserFilter.apply(ctx, [code, { path: 'source/test.js' }]);
-
-    result.length.should.below(code.length);
+    result.length.should.below(es5.length);
   });
 
   it('es6 - terser (default options)', async () => {
-    const ctx = {
-      config: {
-        uglify: {
-          mangle: true,
-          output: {},
-          compress: {},
-          exclude: '*.min.js'
-        }
-      }
-    };
-
     const code = `
     const x = {
         baz_: 0,
@@ -58,78 +49,25 @@ describe('hexo-uglify', () => {
     x["baz_"] = 3;
     console.log(x.calc());`;
 
-    const result = await terserFilter.apply(ctx, [code, { path: 'source/test.js' }]);
+    const result = await f(code, { path: 'source/test.js' });
 
     result.length.should.below(code.length);
   });
 
   it('exclude - terser should ignore *.min.js by default', async () => {
-    const ctx = {
-      config: {
-        uglify: {
-          mangle: true,
-          output: {},
-          compress: {},
-          exclude: '*.min.js'
-        }
-      }
-    };
+    const result = await f(es5, { path: 'source/test.min.js' });
 
-    const code = `
-    var x = {
-        baz_: 0,
-        foo_: 1,
-        calc: function() {
-            return this.foo_ + this.baz_;
-        }
-    };
-    x.bar_ = 2;
-    x["baz_"] = 3;
-    console.log(x.calc());`;
-
-    const result = await terserFilter.apply(ctx, [code, { path: 'source/test.min.js' }]);
-
-    result.should.eql(code);
+    result.should.eql(es5);
   });
 
-  describe('after_render', () => {
-    const Hexo = require('hexo');
-    const hexo = new Hexo(__dirname, { silent: true });
-    const code = `
-    var x = {
-        baz_: 0,
-        foo_: 1,
-        calc: function() {
-            return this.foo_ + this.baz_;
-        }
-    };
-    x.bar_ = 2;
-    x["baz_"] = 3;
-    console.log(x.calc());`;
-    const defaultCfg = JSON.parse(JSON.stringify(Object.assign(hexo.config, {
-      uglify: {
-        mangle: true,
-        output: {},
-        compress: {},
-        exclude: '*.min.js',
-        es6: true
-      }
-    })));
-
-    beforeEach(() => {
-      hexo.config = JSON.parse(JSON.stringify(defaultCfg));
+  it('after_render', async () => {
+    hexo.extend.filter.register('after_render:js', f);
+    const data = { path: null };
+    const result = await hexo.extend.filter.exec('after_render:js', es5, {
+      args: [data]
     });
+    result.length.should.below(es5.length);
 
-    it('default', async () => {
-      const fn = require('../lib/filter').bind(hexo);
-      hexo.extend.filter.register('after_render:js', fn);
-      const data = { path: null };
-      const result = await hexo.extend.filter.exec('after_render:js', code, {
-        args: [data]
-      });
-      result.length.should.below(code.length);
-
-      hexo.extend.filter.unregister('after_render:js', fn);
-    });
+    hexo.extend.filter.unregister('after_render:js', f);
   });
 });
