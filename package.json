@@ -1,7 +1,7 @@
 {
   "name": "hexo-uglify",
-  "version": "1.1.0",
-  "description": "Minify JavaScript files with UglifyJS.",
+  "version": "2.0.0",
+  "description": "Minify JavaScript files with Terser.",
   "main": "index.js",
   "scripts": {
     "test": "mocha test/index.js",
@@ -16,13 +16,13 @@
     "index.js"
   ],
   "engines": {
-    "node": ">= 8.6.0"
+    "node": ">= 10.13.0"
   },
   "repository": "hexojs/hexo-uglify",
   "keywords": [
     "hexo",
     "filter",
-    "uglify"
+    "terser"
   ],
   "author": "Tommy Chen <tommy351@gmail.com> (http://zespia.tw)",
   "maintainers": [
