@@ -3,37 +3,7 @@
 require('chai').should();
 
 describe('hexo-uglify', () => {
-  const uglifyFilter = require('../lib/filter-uglifyjs');
-  const terserFilter = require('../lib/filter-terser');
-
-  it('es5 - uglify (default options)', () => {
-    const ctx = {
-      config: {
-        uglify: {
-          mangle: true,
-          output: {},
-          compress: {},
-          exclude: '*.min.js'
-        }
-      }
-    };
-
-    const code = `
-    var x = {
-        baz_: 0,
-        foo_: 1,
-        calc: function() {
-            return this.foo_ + this.baz_;
-        }
-    };
-    x.bar_ = 2;
-    x["baz_"] = 3;
-    console.log(x.calc());`;
-
-    const result = uglifyFilter.apply(ctx, [code, { path: 'source/test.js' }]);
-
-    result.length.should.below(code.length);
-  });
+  const terserFilter = require('../lib/filter');
 
   it('es5 - terser (default options)', async () => {
     const ctx = {
@@ -91,35 +61,6 @@ describe('hexo-uglify', () => {
     const result = await terserFilter.apply(ctx, [code, { path: 'source/test.js' }]);
 
     result.length.should.below(code.length);
-  });
-
-  it('exclude - uglify should ignore *.min.js by default', () => {
-    const ctx = {
-      config: {
-        uglify: {
-          mangle: true,
-          output: {},
-          compress: {},
-          exclude: '*.min.js'
-        }
-      }
-    };
-
-    const code = `
-    var x = {
-        baz_: 0,
-        foo_: 1,
-        calc: function() {
-            return this.foo_ + this.baz_;
-        }
-    };
-    x.bar_ = 2;
-    x["baz_"] = 3;
-    console.log(x.calc());`;
-
-    const result = uglifyFilter.apply(ctx, [code, { path: 'source/test.min.js' }]);
-
-    result.should.eql(code);
   });
 
   it('exclude - terser should ignore *.min.js by default', async () => {
@@ -180,7 +121,7 @@ describe('hexo-uglify', () => {
     });
 
     it('default', async () => {
-      const fn = require('../lib/filter-terser').bind(hexo);
+      const fn = require('../lib/filter').bind(hexo);
       hexo.extend.filter.register('after_render:js', fn);
       const data = { path: null };
       const result = await hexo.extend.filter.exec('after_render:js', code, {
