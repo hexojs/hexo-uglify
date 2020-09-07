@@ -16,7 +16,7 @@
     "index.js"
   ],
   "engines": {
-    "node": ">= 8.6.0"
+    "node": ">= 10.13.0"
   },
   "repository": "hexojs/hexo-uglify",
   "keywords": [
