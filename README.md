@@ -19,7 +19,7 @@ uglify:
   output:
   compress:
   exclude:
-    - *.min.js
+    - '*.min.js'
 ```
 
 - **exclude**: Exclude files. Use [glob expressions](https://github.com/micromatch/micromatch#extended-globbing) for path matching.
