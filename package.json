@@ -4,8 +4,8 @@
   "description": "Minify JavaScript files with Terser.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/index.js",
-    "test-cov": "nyc --reporter=lcovonly npm test",
+    "test": "mocha test",
+    "test-cov": "c8 --reporter=lcovonly mocha test",
     "eslint": "eslint ."
   },
   "directories": {
@@ -34,6 +34,7 @@
     "terser": "^5.10.0"
   },
   "devDependencies": {
+    "c8": "^9.1.0",
     "chai": "^4.3.4",
     "eslint": "^8.3.0",
     "eslint-config-hexo": "5.0.0",
