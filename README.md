@@ -16,11 +16,11 @@ $ npm install hexo-uglify --save
 
 ```yaml
 uglify:
-  mangle: true
-  output:
-  compress:
   exclude:
     - "*.min.js"
+  mangle: true
+  # output:
+  # compress:
 ```
 
 - **exclude**: Exclude files. Use [glob expressions](https://github.com/micromatch/micromatch#extended-globbing) for path matching.
